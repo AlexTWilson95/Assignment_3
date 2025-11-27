@@ -1,0 +1,46 @@
+<%- include("partials/header", { title: "View Workout", user: user }) %>
+
+<div class="container mt-5">
+
+  <!-- PAGE TITLE (always the same) -->
+  <h2 class="text-center mb-4">View Workout</h2>
+
+  <!-- WORKOUT NAME (displayed under the page title) -->
+  <h4 class="text-center mb-4"><%= workout.workoutName %></h4>
+
+  <div class="rounded-box p-4 mx-auto" style="max-width: 1100px;">
+
+    <p class="text-center mb-4">
+      Date: <strong><%= workout.date %></strong>
+    </p>
+
+    <table class="table table-bordered text-center align-middle">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Exercise Name</th>
+          <th>Load / Weight</th>
+          <th>Sets / Reps / Time</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% workout.exercises.forEach(ex => { %>
+          <tr>
+            <td><%= workout.date %></td>
+            <td><%= ex.exerciseName %></td>
+            <td><%= ex.load %></td>
+            <td><%= ex.timeOrSets %></td>
+            <td><%= ex.info %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<%- include("partials/footer") %>
+
+

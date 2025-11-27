@@ -1,0 +1,90 @@
+<%- include("partials/header", { title, user }) %>
+
+<div class="create-container">
+
+  <h1 class="page-title text-center">Create a Workout</h1>
+
+  <form action="<%= action %>" method="POST">
+
+    <!-- Workout name centered -->
+    <div class="create-name-block">
+      <label class="label-title">Workout Name:</label>
+      <input type="text"
+             name="workoutName"
+             class="workout-name-input"
+             value="<%= workout ? workout.workoutName : '' %>"
+             required>
+    </div>
+
+    <!-- Date left above table -->
+    <div class="date-label-row">
+      <label class="me-2">Date:</label>
+      <input type="date"
+             name="date"
+             id="dateField"
+             class="date-input"
+             value="<%= workout ? workout.date : '' %>">
+    </div>
+
+        <table class="workout-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Exercise Name</th>
+                    <th>Load / Weight</th>
+                    <th>Sets / Reps / Time</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody id="exerciseRows">
+                <% if (workout) { %>
+                    <% workout.exercises.forEach((ex, i) => { %>
+                        <tr>
+                            <td><input type="text" name="dateRow" value="<%= workout.date %>" readonly></td>
+                            <td><input type="text" name="exerciseName" value="<%= ex.exerciseName %>"></td>
+                            <td><input type="text" name="load" value="<%= ex.load %>"></td>
+                            <td><input type="text" name="timeOrSets" value="<%= ex.timeOrSets %>"></td>
+                            <td><input type="text" name="info" value="<%= ex.info %>"></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td><input type="text" name="dateRow" readonly></td>
+                        <td><input type="text" name="exerciseName"></td>
+                        <td><input type="text" name="load"></td>
+                        <td><input type="text" name="timeOrSets"></td>
+                        <td><input type="text" name="info"></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <button type="button" id="addRowBtn" class="add-row-btn">+ Add Row</button>
+        <button type="submit" class="save-btn">Save Workout</button>
+
+    </form>
+
+</div>
+<script>
+document.getElementById("addRowBtn").addEventListener("click", () => {
+
+    const tableBody = document.getElementById("exerciseRows");
+    const workoutDate = document.getElementById("dateField").value;
+
+    const newRow = document.createElement("tr");
+
+    newRow.innerHTML = `
+        <td><input type="text" name="dateRow" value="${workoutDate}" readonly></td>
+        <td><input type="text" name="exerciseName"></td>
+        <td><input type="text" name="load"></td>
+        <td><input type="text" name="timeOrSets"></td>
+        <td><input type="text" name="info"></td>
+    `;
+
+    tableBody.appendChild(newRow);
+});
+</script>
+
+
+<%- include("partials/footer") %>

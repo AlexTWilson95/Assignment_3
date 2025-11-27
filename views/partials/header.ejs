@@ -1,35 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workout Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | Workout Planner</title>
 
   <!-- Bootstrap CSS -->
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-    rel="stylesheet"
-  >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom CSS -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Your CSS -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">Workout Tracker</a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<!-- ===================== HEADER NAV ===================== -->
+<nav class="navbar navbar-light bg-light px-3 d-flex justify-content-between">
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/workouts">Workouts</a></li>
-        <li class="nav-item"><a class="nav-link" href="/workouts/create">Add Workout</a></li>
-      </ul>
-    </div>
+  <!-- LEFT SIDE (GHOST BALANCER for perfect centering) -->
+  <div class="invisible d-flex align-items-center">
+    <button class="btn btn-outline-dark me-2">Fake</button>
+    <button class="btn btn-dark me-2">Fake</button>
+    <i class="fa-solid fa-circle-user fs-3"></i>
   </div>
+
+  <!-- CENTER TITLE -->
+  <h2 class="text-center m-0 flex-grow-1"><%= title %></h2>
+
+  <!-- RIGHT SIDE (REAL BUTTONS) -->
+  <div class="d-flex align-items-center">
+
+    <% if (!user) { %>
+      <a href="/login" class="btn btn-outline-dark me-2">Login</a>
+      <a href="/signup" class="btn btn-dark me-3">Signup</a>
+    <% } else { %>
+      <a href="/logout" class="btn btn-outline-dark me-2">Logout</a>
+    <% } %>
+
+    <a href="<%= user ? '/profile' : '/login' %>" class="fs-3">
+      <i class="fa-solid fa-circle-user"></i>
+    </a>
+
+  </div>
+
 </nav>
+
+<!-- ===================== NAV BUTTONS UNDER HEADER ===================== -->
+<div class="container mt-3 text-center">
+  <div class="d-flex justify-content-center gap-4">
+
+    <a href="/" class="btn btn-outline-dark px-4 py-2">Home</a>
+
+    <a href="/sample" class="btn btn-outline-dark px-4 py-2">Sample</a>
+
+    <% if (!user) { %>
+        <a href="/login" class="btn btn-outline-dark px-4 py-2">My Workouts</a>
+        <a href="/login" class="btn btn-outline-dark px-4 py-2">Create Workout</a>
+    <% } else { %>
+        <a href="/workouts" class="btn btn-outline-dark px-4 py-2">My Workouts</a>
+        <a href="/workouts/create" class="btn btn-outline-dark px-4 py-2">Create Workout</a>
+    <% } %>
+
+  </div>
+</div>
+
+<main class="container mt-5">
+

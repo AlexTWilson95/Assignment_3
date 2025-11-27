@@ -1,0 +1,44 @@
+<%- include("partials/header", { title: "Profile", user: user, showNavBar: false }) %>
+
+<div class="d-flex justify-content-center mt-5">
+
+  <div class="p-4 shadow-sm"
+       style="
+         width: 700px;
+         min-height: 400px;
+         border: 2px solid #444;
+         border-radius: 25px;
+         background: #fff;
+       ">
+
+    <!-- Page Title -->
+    <h2 class="text-center fw-bold mb-4">Profile Overview</h2>
+
+    <!-- Inside content matches create workout spacing -->
+    <div class="mt-4">
+
+      <div class="row mb-4">
+        <div class="col-4 fw-bold text-end">Username:</div>
+        <div class="col-6 text-start"><%= user.username %></div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-4 fw-bold text-end">Workout Plans:</div>
+        <div class="col-6 text-start"><%= workoutCount %></div>
+      </div>
+
+      <hr>
+
+      <div class="text-center mt-4">
+        <a href="/workouts" class="btn btn-outline-dark px-4 py-2">View My Workouts</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<%- include("partials/footer") %>
+
+
