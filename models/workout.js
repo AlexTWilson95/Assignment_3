@@ -1,29 +1,26 @@
 const mongoose = require("mongoose");
 
-const workoutSchema = new mongoose.Schema({
-  date: {
-    type: Date,
+const ExerciseSchema = new mongoose.Schema({
+  exerciseName: String,
+  load: String,
+  timeOrSets: String,
+  info: String
+});
+
+const WorkoutSchema = new mongoose.Schema({
+  username: String,
+
+  workoutName: {
+    type: String,
     required: true
   },
-  exerciseName: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  load: {
-    type: Number,
-    required: false
-  },
-  timeOrSets: {
-    type: String,
-    required: false,
-    trim: true
-  },
-  info: {
-    type: String,
-    required: false,
-    trim: true
-  }
-}, { timestamps: true });
+  // Single date for all rows
+  date: String,
 
-module.exports = mongoose.model("Workout", workoutSchema);
+  // Array of rows (spreadsheet entries)
+  exercises: [ExerciseSchema]
+});
+
+module.exports = mongoose.model("Workout", WorkoutSchema);
+
+
